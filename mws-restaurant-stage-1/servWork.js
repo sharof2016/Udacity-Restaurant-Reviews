@@ -6,7 +6,7 @@ let urlToCache = [
 	'./css/styles.css',
 	'./data/restaurants.json',
 	'./js/register-sw.js',
-	'./mapbox.js',
+	'./js/mapbox.js',
 	'./img/1.jpg',
 	'./img/2.jpg',
 	'./img/3.jpg',
@@ -20,7 +20,7 @@ let urlToCache = [
 	'./js/main.js',
 	'./js/restaurant_info.js',
 	'./js/dbhelper.js',
-	'./servWork.js',
+	// './servWork.js',
 
 ];
 self.addEventListener('install', function (event) {
@@ -52,6 +52,18 @@ self.addEventListener('activate', function (event) {
 });
 
 self.addEventListener('fetch', function (event) {
+	const requestUrl = new URL(event.request.url);
+
+  // only highjack request made to our app (not mapbox maps or leaflet, for example)
+  if (requestUrl.origin === location.origin) {
+
+    // Since requests made to restaurant.html have search params (like ?id=1), the url can't be used as the
+    // key to access the cache, so just respondWith restaurant.html if pathname startsWith '/restaurant.html'
+    if (requestUrl.pathname.startsWith('/restaurant.html')) {
+      event.respondWith(caches.match('/restaurant.html'));
+      return; // Done handling request, so exit early.
+    }
+  }
 	event.respondWith(
 		caches.match(event.request).then(function (response) {
 			return response || fetch(event.request);
