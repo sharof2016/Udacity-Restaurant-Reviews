@@ -1,4 +1,4 @@
-# Mobile Web Specialist Certification Course
+# FEND Course
 ---
 #### _Three Stage Course Material Project - Restaurant Reviews_
 
