@@ -54,14 +54,14 @@ self.addEventListener('activate', function (event) {
 self.addEventListener('fetch', function (event) {
 	const requestUrl = new URL(event.request.url);
 
-  // only highjack request made to our app (not mapbox maps or leaflet, for example)
+  // highjack only requests made to our app (not mapbox maps or leaflet, for example)
   if (requestUrl.origin === location.origin) {
 
     // Since requests made to restaurant.html have search params (like ?id=1), the url can't be used as the
     // key to access the cache, so just respondWith restaurant.html if pathname startsWith '/restaurant.html'
     if (requestUrl.pathname.startsWith('/restaurant.html')) {
       event.respondWith(caches.match('/restaurant.html'));
-      return; // Done handling request, so exit early.
+      return; // Done handling request, exit early.
     }
   }
 	event.respondWith(
