@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 /**
 * Initialize leaflet map
 */
+
 initMap = () => {
   fetchRestaurantFromURL((error, restaurant) => {
     if (error) { // Got an error!
