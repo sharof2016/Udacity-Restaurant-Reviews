@@ -1,10 +1,7 @@
 <!-- Special Thanks to Mohammed Riad, Mattew Cranford, Ryan Waite,Alexandro Perez for their walkthrough, which helped me with this project -->
-
 <!DOCTYPE html>
 
-<html lang="en">
-document text
-</html>
+<html lang="en"></html>
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,11 +25,11 @@ document text
     <section>
       <div class="filter-options" tabindex="0" aria-label="Filter results">
         <h2>Filter Results</h2>
-        <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
+        <select id="neighborhoods-select" aria-label="Neighborhood selection" name="neighborhoods" onchange="updateRestaurants()">
           <option value="all">All Neighborhoods</option>
         </select>
         <label for="neighborhoods-select">Neighborhoods-select</label>
-        <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
+        <select id="cuisines-select" aria-label="Cusine Selection" name="cuisines" onchange="updateRestaurants()">
           <option value="all">All Cuisines</option>
         </select>
         <label for="cuisines-select">Cuisines-select</label>
