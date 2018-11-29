@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 /**
 * Initialize leaflet map
 */
-
 initMap = () => {
   fetchRestaurantFromURL((error, restaurant) => {
     if (error) { // Got an error!
@@ -83,17 +82,18 @@ fetchRestaurantFromURL = (callback) => {
 fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name;
-
+  
   const address = document.getElementById('restaurant-address');
   address.innerHTML = restaurant.address;
-
+  
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
+  image.setAttribute("alt", `Picture of restaurant ${restaurant.name}`);
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
-
+  
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
-
+  
   // fill operating hours
   if (restaurant.operating_hours) {
     fillRestaurantHoursHTML();
@@ -109,15 +109,15 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
   const hours = document.getElementById('restaurant-hours');
   for (let key in operatingHours) {
     const row = document.createElement('tr');
-
+    
     const day = document.createElement('td');
     day.innerHTML = key;
     row.appendChild(day);
-
+    
     const time = document.createElement('td');
     time.innerHTML = operatingHours[key];
     row.appendChild(time);
-
+    
     hours.appendChild(row);
   }
 }
@@ -130,7 +130,7 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   const title = document.createElement('h2');
   title.innerHTML = 'Reviews';
   container.appendChild(title);
-
+  
   if (!reviews) {
     const noReviews = document.createElement('p');
     noReviews.innerHTML = 'No reviews yet!';
@@ -151,20 +151,24 @@ createReviewHTML = (review) => {
   const li = document.createElement('li');
   const name = document.createElement('p');
   name.innerHTML = review.name;
+  name.setAttribute("tabindex", "0");
   li.appendChild(name);
-
+  
   const date = document.createElement('p');
   date.innerHTML = review.date;
+  date.setAttribute("tabindex", "0");
   li.appendChild(date);
-
+  
   const rating = document.createElement('p');
   rating.innerHTML = `Rating: ${review.rating}`;
+  rating.setAttribute("tabindex", "0");
   li.appendChild(rating);
-
+  
   const comments = document.createElement('p');
   comments.innerHTML = review.comments;
+  comments.setAttribute("tabindex", "0");
   li.appendChild(comments);
-
+  
   return li;
 }
 
